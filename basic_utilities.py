@@ -44,3 +44,75 @@ def mean_density(z, cosmo=None):
 
     return rho.value
 
+
+def critical_density(z, cosmo='default'):
+    """
+    critical density of the universe
+    
+    Paramaters
+    ----------
+    z : array_like
+        redshift
+    
+    cosmo : astropy.cosmology object
+        cosmology object
+    
+    Returns
+    -------
+    rho_c : numpy.array
+        critical density of the universe at redshift z in g/cm^3
+    """
+    
+    if cosmo=='default':
+        cosmo = default_cosmo
+    
+    rho = (3.0*cosmo.H(z)**2)/(8.0*np.pi*const.G)
+    rho = rho.to(u.g / u.cm**3)
+    
+    return rho
+
+
+def lookback_time(z, cosmo='default'):
+    """
+    lookback time
+    
+    Paramaters
+    ----------
+    z : array_like
+        redshift
+    
+    cosmo : astropy.cosmology object
+    
+    Returns
+    -------
+    t : array_like
+        lookback time to redshift z in h^-1 Gyr
+    
+    Notes
+    -----
+    This function builds an interpolation function instead of doing an integral for 
+    each z which makes this substantially faster than astropy.cosmology lookback_time() 
+    routine for large arrays.
+    """
+    
+    if cosmo=='default':
+        cosmo = default_cosmo
+    
+    z = np.atleast_1d(z)
+    
+    #if z<0, set t=0.0
+    mask = (z>0.0)
+    t = np.zeros(len(z))
+    
+    #build interpolation function for t_look(z)
+    max_z = np.max(z)
+    z_sample = np.logspace(0,np.log10(max_z+1),1000) - 1.0
+    t_sample = cosmo.lookback_time(z_sample).to('Gyr').value
+    f = interp1d(np.log10(1+z_sample), np.log10(t_sample), fill_value='extrapolate')
+    
+    t[mask] = 10.0**f(np.log10(1+z[mask])) * cosmo.h
+    
+    return t
+
+
+
