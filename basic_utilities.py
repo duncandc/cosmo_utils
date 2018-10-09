@@ -1,5 +1,5 @@
 """
-cosmology utility functions
+basic cosmology utility functions
 """
 
 from __future__ import absolute_import, division, print_function, unicode_literals
@@ -7,13 +7,13 @@ import numpy as np
 from astropy import units as u
 from astropy import constants as const
 import scipy.integrate as integrate
+from default_cosmo import default_cosmo  # define a default cosology for utilities
 
-__all__=('mean_density',)
+
+__all__=('mean_density', 'critical_density', 'lookback_time', 'hubble_distance',
+         'comoving_distance', 'transverse_comoving_distance', 'angular_diameter_distance',
+         'luminosity_distance', 'comoving_volume',)
 __author__=('Duncan Campbell')
-
-# define a default cosology for utilities
-from astropy.cosmology import FlatLambdaCDM
-default_cosmo = FlatLambdaCDM(H0=70, Om0=0.3, Ob0=0.05, Tcmb0=2.7255)
 
 
 def mean_density(z, cosmo=None):
