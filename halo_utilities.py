@@ -6,7 +6,7 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 import numpy as np
 from astropy import units as u
 from astropy import constants as const
-from default_cosmo import default_cosmo  # define a default cosology for utilities
+from .default_cosmo import default_cosmo  # define a default cosology for utilities
 
 
 __all__=('delta_vir', 'virial_radius', 'virial_halo_mass',

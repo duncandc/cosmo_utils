@@ -6,8 +6,8 @@ import numpy as np
 from astropy import units as u
 from astropy import constants as const
 import scipy.integrate as integrate
-from default_cosmo import default_cosmo  # define a default cosology for utilities
-from distance_functions import hubble_distance, angular_diameter_distance, _Ez
+from .default_cosmo import default_cosmo  # define a default cosology for utilities
+from .distance_functions import hubble_distance, angular_diameter_distance, _Ez
 
 __all__=('comoving_volume',)
 __author__=('Duncan Campbell')

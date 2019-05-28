@@ -7,7 +7,7 @@ import numpy as np
 from astropy import units as u
 from astropy import constants as const
 import scipy.integrate as integrate
-from default_cosmo import default_cosmo  # define a default cosology for utilities
+from .default_cosmo import default_cosmo  # define a default cosology for utilities
 
 
 __all__=('hubble_distance', 'comoving_distance', 'transverse_comoving_distance',

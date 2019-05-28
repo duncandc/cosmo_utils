@@ -5,7 +5,7 @@ interpolated cosmology utility functions
 from astropy.cosmology import FlatLambdaCDM
 from scipy import interpolate
 import numpy as np
-from default_cosmo import default_cosmo  # define a default cosology for utilities
+from .default_cosmo import default_cosmo  # define a default cosology for utilities
 
 __all__=['interpolated_distmod', 'interpolated_lookback_time']
 __author__ = ['Duncan Campbell']
