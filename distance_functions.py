@@ -30,7 +30,7 @@ def hubble_distance(H0):
         Hubble distance in Mpc
     """
 
-    return const.c.to('km/s')/H0
+    return (const.c.to('km/s')/H0).value
 
 
 def comoving_distance(z,cosmo=None):
